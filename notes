@@ -1,4 +1,12 @@
-user types uncoming_tournaments
+CLI
+  -Scraper
+    -List of Tourneys by state
+      -Tournament List for that state
+
+
+      A tournament has a NAME, DATE & TIER
+
+user types tournaments
 
 Show a list of tournaments
 
