@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+#interprets thru ruby, because the user will just be running the file, not necessarily from ruby itself.
+
+require './lib/tournaments'
+#loads the tournaments file.
+
+Tournaments::CLI.new.call
+
