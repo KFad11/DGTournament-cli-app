@@ -1,8 +1,14 @@
 class Tournament
   attr_accessor :name, :date, :tier
 
-def intialize(stuff, more_stuff)
-  @@all << self
+  @@all = []
 
-end
+  def intialize(name, date, tier)
+    @@all << self
+  end
+
+  def self.all
+    @@all
+  end
+
 end

@@ -1,7 +1,5 @@
-class Cli
+class CLI
   def call
-    puts "Hello World!"
     EventScraper.run!
-    puts Tournament.all.first.title
   end
 end
