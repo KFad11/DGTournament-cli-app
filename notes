@@ -1,23 +1,9 @@
-CLI
-  -Scraper
-    -List of Tourneys by state
-      -Tournament List for that state
-
 
       A tournament has a NAME, DATE & TIER
 
-user types tournaments
 
-Show a list of tournaments
+Name = tournaments.css(".tournament-C").first.css("em").text
 
-1. 2019 Treeze - Saturday, April 13 - Ctier
-2. 2019 Breeze - Sunday, April 14 - Ctier
-3. 2019 Delaware Amateur Championship driven by Innova - Saturday June 22 - Btier
-4. The King of The Hill - Saturday July 13 - Ctier
-5. Delaware Disc Golf Challenge - National Tour Friday-Sunday August 23-25 - National Tour
+Date =
 
-Which tournament would you like to learn more about?
-
-1, show that tourney
-2, show that one... and so on.
-
+Tier =

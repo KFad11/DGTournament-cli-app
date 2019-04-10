@@ -1,3 +1,4 @@
+# never scrapes, never puts, handles only things dealing with a tournament
 class Tournament
   attr_accessor :name, :date, :tier
 
