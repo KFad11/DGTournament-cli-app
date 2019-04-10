@@ -3,26 +3,37 @@ class CLI
 
   def call
     welcome
+    tournament_list
     menu
     goodbye
   end
 
   def welcome
     puts "Welcome to Pennsylvania Disc Golf Tournament Tracker"
-    puts "Here we can see what disc golf tournaments are happening, when, and what competition level they are based on their 'tier'"
-    puts "B Tier tournaments are higher than C Tier in terms of competition"
+    puts "See what disc golf tournaments are happening, when, & what competition level they are based on their 'tier'"
   end
 
   def menu
     input = nil
     while input != "exit"
-      puts "Please select 'C' for a list of C Tiers, or 'B' for B Tiers, or type exit:"
+      puts "Please type a specific tier to see just those tournaments or type exit:"
       input = gets.strip.downcase
       case input
       when "c"
+        puts "C Tier is the lowest tier"
         puts "C Tier list"
       when "b"
+        puts "B Tier is a mid tier"
         puts "B Tier list"
+      when "x"
+        puts "X Tier are experimental and have special rules applied"
+        puts "X Tier list"
+      when "c/b"
+        puts "C/B Tier are split for the Professional and Amatuer Divisions"
+        puts "C/B Tier list"
+      when "doubles"
+        puts "Doubles events are played with a partner"
+        puts "Doubles Tier List"
       else
         puts "Not a valid tier to search, type either the tier letters"
       end

@@ -6,4 +6,4 @@ Name = tournaments.css(".tournament-C").first.css("em").text
 
 Date = tournaments.css(".tournament-C").first.css(".t-date").text
 
-Tier =
+Tier = tournaments.css(".tournament-C").first.css(".info.ts").text

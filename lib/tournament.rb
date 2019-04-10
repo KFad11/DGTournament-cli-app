@@ -5,11 +5,13 @@ class Tournament
   @@all = []
 
   def intialize(name, date, tier)
+    @name = name
+    @date = date
+    @tier = tier
     @@all << self
   end
 
   def self.all
     @@all
   end
-
 end
