@@ -40,11 +40,10 @@ class CLI
   end
 
   def tournament_list
-    puts "Master List of tournaments:"
-    # binding.pry
+    puts "Master List of tournaments:".colorize(:red)
     Tournament.all.map do |tourney|
-      puts "Name:#{tourney.name}".colorize(:green), "Date:#{tourney.date}".colorize(:light_blue), "Tier:#{tourney.tier}".colorize(:red)
-      puts "---------------------------------------------------------------"
+      puts "Name:#{tourney.name}".colorize(:green), "Date:#{tourney.date}".colorize(:light_blue), "Tier:#{tourney.tier}".colorize(:green)
+      puts "---------------------------------------------------------------".colorize(:red)
     end
   end
 
@@ -52,5 +51,3 @@ class CLI
     puts "Come back soon to check up on the tournaments happening in PA!"
   end
 end
-
-#EventScraper.make_c_tournaments
