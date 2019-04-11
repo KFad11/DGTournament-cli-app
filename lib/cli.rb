@@ -10,7 +10,8 @@ class CLI
     puts "Welcome to Pennsylvania Disc Golf Tournament Tracker"
     puts "See what disc golf tournaments are happening, when, & what competition level they are based on their 'tier'"
     input = nil
-    EventScraper.new.make_tournaments
+    scraper = EventScraper.new
+    scraper.make_tournaments
     while input != "exit"
       puts "Please type 'List' to see all tournaments, a specific tier option if you know one, or type exit:"
       input = gets.strip.downcase
@@ -40,9 +41,10 @@ class CLI
 
   def tournament_list
     puts "Master List of tournaments:"
-    binding.pry
+    # binding.pry
     Tournament.all.map do |tourney|
-      puts "Name:#{tourney.name}, Date:#{tourney.date}, Tier:#{tourney.tier}"
+      puts "Name:#{tourney.name}".colorize(:green), "Date:#{tourney.date}".colorize(:light_blue), "Tier:#{tourney.tier}".colorize(:red)
+      puts "---------------------------------------------------------------"
     end
   end
 
