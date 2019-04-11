@@ -1,6 +1,5 @@
 # handles putsing info to user, and the least amount possible besides that
 class CLI
-
   def call
     menu
     tournament_list
@@ -42,7 +41,7 @@ class CLI
   def tournament_list
     puts "Master List of tournaments:"
     binding.pry
-    Tournament.all.each do |tourney|
+    Tournament.all.map do |tourney|
       puts "Name:#{tourney.name}, Date:#{tourney.date}, Tier:#{tourney.tier}"
     end
   end
