@@ -2,7 +2,6 @@
 class CLI
   def call
     menu
-    goodbye
   end
 
   def menu
@@ -12,11 +11,13 @@ class CLI
     scraper = EventScraper.new
     scraper.make_tournaments
     while input != "exit"
-      puts "Please type 'List' to see all tournaments, a specific tier option if you know one, or type exit:"
+      puts "Please type 'list' to see all tournaments, or type an ID# to see more details for that tournament or type exit:"
       input = gets.strip.downcase
       case input
       when "list"
         tournament_list
+      when "exit"
+        goodbye
       else
         puts "Not a valid search, please type list or exit"
       end
@@ -26,7 +27,7 @@ class CLI
   def tournament_list
     puts "Master List of tournaments:".colorize(:red)
     Tournament.all.map do |tourney|
-      puts "Name: #{tourney.name}".colorize(:green), "Date: #{tourney.date}".colorize(:light_blue), "Tier: #{tourney.tier}".colorize(:green)
+      puts "Tournament ID:#{tourney.id}".colorize(:light_blue), "Name: #{tourney.name}".colorize(:green), "Date: #{tourney.date}".colorize(:light_blue), "Tier: #{tourney.tier}".colorize(:green)
       puts "---------------------------------------------------------------".colorize(:red)
     end
   end
