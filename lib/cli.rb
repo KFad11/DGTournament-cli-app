@@ -2,7 +2,6 @@
 class CLI
   def call
     menu
-    tournament_list
     goodbye
   end
 
@@ -18,21 +17,6 @@ class CLI
       case input
       when "list"
         tournament_list
-      when "c"
-        puts "C Tier is the lowest tier"
-        puts "C Tier list"
-      when "b"
-        puts "B Tier is a mid tier"
-        puts "B Tier list"
-      when "x"
-        puts "X Tier are experimental events and have special rules applied"
-        puts "X Tier list"
-      when "c/b"
-        puts "C/B Tier are split for the Professional and Amatuer Divisions"
-        puts "C/B Tier list"
-      when "doubles"
-        puts "Doubles events are played with a partner"
-        puts "Doubles Tier List"
       else
         puts "Not a valid search, please type list or exit"
       end
@@ -42,7 +26,7 @@ class CLI
   def tournament_list
     puts "Master List of tournaments:".colorize(:red)
     Tournament.all.map do |tourney|
-      puts "Name:#{tourney.name}".colorize(:green), "Date:#{tourney.date}".colorize(:light_blue), "Tier:#{tourney.tier}".colorize(:green)
+      puts "Name: #{tourney.name}".colorize(:green), "Date: #{tourney.date}".colorize(:light_blue), "Tier: #{tourney.tier}".colorize(:green)
       puts "---------------------------------------------------------------".colorize(:red)
     end
   end

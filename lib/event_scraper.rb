@@ -7,9 +7,12 @@ class EventScraper
   def make_tournaments
     page.css(".tournaments-listing-all").children.each do |tournament|
       next if tournament.attr('style') == "text-align: center;"
-      name = tournament.css("em").map { |name| name.text.strip }
-      date = tournament.css(".t-date").map { |date| date.text.strip }
-      tier = tournament.css(".info.ts").map { |tier| tier.text.strip }
+      name = tournament.css("em").map { |name| name.text.strip }.first
+      date = tournament.css(".t-date").map { |date| date.text.strip }.first
+      tier = tournament.css(".info.ts").map { |tier| tier.text.strip }.first
+      if tier == ""
+        tier = "Unsanctioned"
+      end
       tourney = Tournament.new(name, date, tier)
     end
   end
