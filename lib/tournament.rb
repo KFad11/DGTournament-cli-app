@@ -4,7 +4,8 @@ class Tournament
 
   @@all = []
 
-  def intialize(name, date, tier)
+  def initialize(name, date, tier)
+    # binding.pry
     @name = name
     @date = date
     @tier = tier
@@ -12,6 +13,8 @@ class Tournament
   end
 
   def self.all
+    # binding.pry
     @@all
   end
+
 end

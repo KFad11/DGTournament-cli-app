@@ -2,23 +2,22 @@
 class CLI
 
   def call
-    welcome
-    tournament_list
     menu
+    tournament_list
     goodbye
   end
 
-  def welcome
+  def menu
     puts "Welcome to Pennsylvania Disc Golf Tournament Tracker"
     puts "See what disc golf tournaments are happening, when, & what competition level they are based on their 'tier'"
-  end
-
-  def menu
     input = nil
+    EventScraper.new.make_tournaments
     while input != "exit"
-      puts "Please type a specific tier to see just those tournaments or type exit:"
+      puts "Please type 'List' to see all tournaments, a specific tier option if you know one, or type exit:"
       input = gets.strip.downcase
       case input
+      when "list"
+        tournament_list
       when "c"
         puts "C Tier is the lowest tier"
         puts "C Tier list"
@@ -26,7 +25,7 @@ class CLI
         puts "B Tier is a mid tier"
         puts "B Tier list"
       when "x"
-        puts "X Tier are experimental and have special rules applied"
+        puts "X Tier are experimental events and have special rules applied"
         puts "X Tier list"
       when "c/b"
         puts "C/B Tier are split for the Professional and Amatuer Divisions"
@@ -35,8 +34,16 @@ class CLI
         puts "Doubles events are played with a partner"
         puts "Doubles Tier List"
       else
-        puts "Not a valid tier to search, type either the tier letters"
+        puts "Not a valid search, please type list or exit"
       end
+    end
+  end
+
+  def tournament_list
+    puts "Master List of tournaments:"
+    binding.pry
+    Tournament.all.each do |tourney|
+      puts "Name:#{tourney.name}, Date:#{tourney.date}, Tier:#{tourney.tier}"
     end
   end
 
