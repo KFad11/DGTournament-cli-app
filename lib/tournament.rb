@@ -1,12 +1,12 @@
-# never scrapes, never puts, handles only things dealing with a tournament
+# frozen_string_literal: true
+
 class Tournament
   attr_accessor :name, :date, :tier, :url, :id
 
   @@all = []
   @@current_id = 1
 
-  def initialize(name, date, tier, url)
-    # binding.pry
+  def initialize(name = nil, date = nil, tier = nil, url = nil)
     @name = name
     @date = date
     @tier = tier
@@ -17,13 +17,10 @@ class Tournament
   end
 
   def self.all
-    # binding.pry
     @@all
   end
 
-  def self.find_by_id(id)
-    all.find do |x|
-      x.id == id
-    end
+  def self.find(id)
+    self.all[id - 1]
   end
 end

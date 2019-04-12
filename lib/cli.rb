@@ -1,36 +1,36 @@
-# handles putsing info to user, and the least amount possible besides that
+# frozen_string_literal: true
+
 class CLI
   def call
-    menu
+    EventScraper.new.scrape_tournaments
+    puts "Welcome to Pennsylvania Disc Golf Tournament Tracker"
+    puts "See what disc golf tournaments are happening, when, \
+& what competition level they are based on their 'tier'"
+    puts "Please type 'list' to see the list or type 'exit'"
+    input = gets.strip
+      if input == "list"
+        tournament_list
+      elsif input == "exit"
+        goodbye
+      else
+        puts "I'm not sure what that is, please type list or exit"
+      end
   end
 
   def menu
-    puts "Welcome to Pennsylvania Disc Golf Tournament Tracker"
-    puts "See what disc golf tournaments are happening, when, & what competition level they are based on their 'tier'"
-    puts "Loading Tournaments......"
-    input = nil
-    scraper = EventScraper.new
-    scraper.make_tournaments
-    while input != "exit"
-      puts "Please type 'list' to see all tournaments, then type an ID# to see more details for that tournament or type exit:"
-      input = gets.strip.downcase
-      case input
-      when "list"
-        tournament_list
-      when 1..81
-        tourney_id = tourney_by_id(tourney_id)
-      when "exit"
-        goodbye
-      else
-        puts "Not a valid search, please type list or exit"
-      end
-    end
+      puts ""
+      puts "Please type an ID# to see more details \
+for that tournament or type exit:"
+      input = gets.strip.to_i
   end
 
   def tournament_list
     puts "Master List of tournaments:".colorize(:red)
     Tournament.all.map do |tourney|
-      puts "Tournament ID:#{tourney.id}".colorize(:light_blue), "Name: #{tourney.name}".colorize(:green), "Date: #{tourney.date}".colorize(:green), "Tier: #{tourney.tier}".colorize(:green)
+      puts "Tournament ID: #{tourney.id}".colorize(:light_blue)
+      puts "Name: #{tourney.name}".colorize(:green)
+      puts "Date: #{tourney.date}".colorize(:green)
+      puts "Tier: #{tourney.tier}".colorize(:green)
       puts "---------------------------------------------------------------".colorize(:yellow)
     end
   end
@@ -38,9 +38,4 @@ class CLI
   def goodbye
     puts "Come back soon to check up on the tournaments happening in PA!"
   end
-
-  def tourney_by_id(tourney_id)
-    Tournament.find_by_id(tourney_id)
-  end
-
 end

@@ -1,32 +1,24 @@
-# handles scraping and likely creating tournament and other objs. Never "puts"
+# frozen_string_literal: true
+
 class EventScraper
   attr_accessor :tourney
+
+  BASE_URL = "https://www.discgolfscene.com"
+
   def page
-    @page ||= Nokogiri::HTML(open("https://www.discgolfscene.com/tournaments/Pennsylvania"))
+    @page ||= Nokogiri::HTML(open("#{BASE_URL}/tournaments/Pennsylvania"))
   end
 
-  def make_tournaments
+  def scrape_tournaments
     page.css(".tournaments-listing-all").children.each do |tournament|
-      # binding.pry
-      next if tournament.attr('style') == "text-align: center;"
-      name = tournament.css("em").map { |name| name.text.strip }.first
-      date = tournament.css(".t-date").map { |date| date.text.strip }.first
-      tier = tournament.css(".info.ts").map { |tier| tier.text.strip }.first
-        if tier == ""
-          tier = "Unsanctioned"
-        end
-      url = tournament.css("div.a").map { |url| url["href"] }
+      next if tournament.attr("style") == "text-align: center;"
 
+      name = tournament.css("em").map { |t_name| t_name.text.strip }.first
+      date = tournament.css(".t-date").map { |t_date| t_date.text.strip }.first
+      tier = tournament.css(".info.ts").map { |t_tier| t_tier.text.strip }.first
+      tier = "Unsanctioned" if tier == ""
+      url = BASE_URL + tournament.css("a").first["href"]
       @tourney = Tournament.new(name, date, tier, url)
     end
   end
-
-  def scrape_details(tourney)
-    binding.pry
-    ind_tourney = Nokogiri::HTML(open(tourney.url))
-    ind_tourney.css(".tounrament").each do |info|
-      info = tournament.css(".tournament-about").text.strip
-    end
-  end
-
 end
