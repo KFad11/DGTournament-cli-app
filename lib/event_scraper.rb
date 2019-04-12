@@ -7,6 +7,7 @@ class EventScraper
 
   def make_tournaments
     page.css(".tournaments-listing-all").children.each do |tournament|
+      # binding.pry
       next if tournament.attr('style') == "text-align: center;"
       name = tournament.css("em").map { |name| name.text.strip }.first
       date = tournament.css(".t-date").map { |date| date.text.strip }.first
@@ -14,13 +15,18 @@ class EventScraper
         if tier == ""
           tier = "Unsanctioned"
         end
-      # url = tournament.css
-      @tourney = Tournament.new(name, date, tier)
+      url = tournament.css("div.a").map { |url| url["href"] }
+
+      @tourney = Tournament.new(name, date, tier, url)
     end
   end
 
   def scrape_details(tourney)
-    details = Nokogiri::HTML(open(tourney.url))
+    binding.pry
+    ind_tourney = Nokogiri::HTML(open(tourney.url))
+    ind_tourney.css(".tounrament").each do |info|
+      info = tournament.css(".tournament-about").text.strip
+    end
   end
 
 end

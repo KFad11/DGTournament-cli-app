@@ -8,6 +8,8 @@ Date = tournaments.css(".tournament-C").first.css(".t-date").text
 
 Tier = tournaments.css(".tournament-C").first.css(".info.ts").text
 
+Url = tournament.css("a").first["href"]
+
 scrape for each element separately, not just a blob of info. tournament_page.css(".t-date").children.map { |name| name.text }.compact
 
 

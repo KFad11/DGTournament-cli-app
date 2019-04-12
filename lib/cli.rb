@@ -7,15 +7,18 @@ class CLI
   def menu
     puts "Welcome to Pennsylvania Disc Golf Tournament Tracker"
     puts "See what disc golf tournaments are happening, when, & what competition level they are based on their 'tier'"
+    puts "Loading Tournaments......"
     input = nil
     scraper = EventScraper.new
     scraper.make_tournaments
     while input != "exit"
-      puts "Please type 'list' to see all tournaments, or type an ID# to see more details for that tournament or type exit:"
+      puts "Please type 'list' to see all tournaments, then type an ID# to see more details for that tournament or type exit:"
       input = gets.strip.downcase
       case input
       when "list"
         tournament_list
+      when 1..81
+        tourney_id = tourney_by_id(tourney_id)
       when "exit"
         goodbye
       else
@@ -27,12 +30,17 @@ class CLI
   def tournament_list
     puts "Master List of tournaments:".colorize(:red)
     Tournament.all.map do |tourney|
-      puts "Tournament ID:#{tourney.id}".colorize(:light_blue), "Name: #{tourney.name}".colorize(:green), "Date: #{tourney.date}".colorize(:light_blue), "Tier: #{tourney.tier}".colorize(:green)
-      puts "---------------------------------------------------------------".colorize(:red)
+      puts "Tournament ID:#{tourney.id}".colorize(:light_blue), "Name: #{tourney.name}".colorize(:green), "Date: #{tourney.date}".colorize(:green), "Tier: #{tourney.tier}".colorize(:green)
+      puts "---------------------------------------------------------------".colorize(:yellow)
     end
   end
 
   def goodbye
     puts "Come back soon to check up on the tournaments happening in PA!"
   end
+
+  def tourney_by_id(tourney_id)
+    Tournament.find_by_id(tourney_id)
+  end
+
 end

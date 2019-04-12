@@ -5,11 +5,12 @@ class Tournament
   @@all = []
   @@current_id = 1
 
-  def initialize(name, date, tier) #url
+  def initialize(name, date, tier, url)
     # binding.pry
     @name = name
     @date = date
     @tier = tier
+    @url = url
     @id = @@current_id
     @@all << self
     @@current_id += 1
@@ -20,4 +21,9 @@ class Tournament
     @@all
   end
 
+  def self.find_by_id(id)
+    all.find do |x|
+      x.id == id
+    end
+  end
 end
