@@ -21,7 +21,9 @@ class Tournament
     @@all
   end
 
-  def self.find(id)
-    self.all[id-1]
+  def self.find_by_id(id)
+    all.find do |tourney|
+      tourney.id == id
+    end
   end
 end

@@ -6,6 +6,8 @@ class CLI
     puts "See what disc golf tournaments are happening, when, \
 & what competition level they are based on their 'tier'"
     start
+    find_tourney = tournament_locator(input)
+
   end
 
   def start
@@ -23,8 +25,7 @@ class CLI
     puts "Please type an ID# to see more details \
 for that tournament or type exit:"
     input = gets.strip.to_i
-    find(id)
-    EventScraper.new.scrape_tournament_info.find
+      if input
   end
 
   def tournament_list
@@ -39,13 +40,18 @@ for that tournament or type exit:"
     end
   end
 
-  # def tournament_info
-  #   Tournament.all.map do |tourney|
-  #     binding.pry
-  #     puts "Here's the info about #{tourney.name}"
-  #     puts "Info: #{tourney.about}"
-  #   end
-  # end
+  def tournament_locator(input)
+    Tournament.find_by_id(input)
+  end
+
+  def tournament_info(tourney)
+    EventScraper.new.scrape_tournament_info(tourney).find
+    Tournament.all.map do |tourney|
+      binding.pry
+      puts "Here's the info about #{tourney.name}"
+      puts "Info: #{tourney.about}"
+    end
+  end
 
   def goodbye
     puts "Come back soon to check up on the tournaments happening in PA!"
