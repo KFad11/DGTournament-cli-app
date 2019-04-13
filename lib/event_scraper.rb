@@ -25,7 +25,6 @@ class EventScraper
   def scrape_tournament_info(tourney)
     info = Nokogiri::HTML(open(tourney.url))
     info.css(".maincontent").each do |about_info|
-      binding.pry
       about.description = about_info.css(".tournament-about").map { |t_about| t_about.text.strip }.first
     end
   end
