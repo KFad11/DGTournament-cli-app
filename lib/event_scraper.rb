@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class EventScraper
-  attr_accessor :tourney, :about
+  attr_accessor :tourney, :about_event
 
   BASE_URL = "https://www.discgolfscene.com"
 
@@ -18,14 +18,15 @@ class EventScraper
       tier = tournament.css(".info.ts").map { |t_tier| t_tier.text.strip }.first
       tier = "Unsanctioned" if tier == ""
       url = BASE_URL + tournament.css("a").first["href"]
-      @tourney = Tournament.new(name, date, tier, about, url)
+      @tourney = Tournament.new(name, date, tier, url)
     end
   end
 
   def scrape_tournament_info(tourney)
-    info = Nokogiri::HTML(open(tourney.url))
-    info.css(".maincontent").each do |about_info|
-      about.description = about_info.css(".tournament-about").map { |t_about| t_about.text.strip }.first
-    end
+    tourney_info = Nokogiri::HTML(open(tourney.url))
+    name = tourney_info.css(".tournament-name").text
+    about = tourney_info.css(".tournament-about").text
+    @about_event = AboutTournament.new
+    # binding.pry
   end
 end
