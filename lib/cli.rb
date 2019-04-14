@@ -2,24 +2,13 @@
 
 class CLI
   def call
-
     welcome_message
+    tournament_list
+    make_selection
 
-    input = gets.strip.downcase
-    if input == "list"
-      tournament_list
-    elsif input == "exit"
-      goodbye
-    else
-      puts "I'm not sure what that is, let's start over."
-      call
-    end
-
-    puts "Please select a Tournament ID by the number to see more info about it:"
-    input = gets.to_i
-      tourney = tournament_locator(input)
-      tournament_info(tourney)
-
+    input = gets.strip.to_i
+    tourney = tournament_locator(input)
+    tournament_info(tourney)
   end
 
   def welcome_message
@@ -41,11 +30,14 @@ class CLI
     end
   end
 
+  def make_selection
+    puts "Please choose a tournament by typing in it's ID#:".colorize(:light_green)
+  end
+
   def tournament_info(tourney)
-    EventScraper.new.scrape_tournament_info(tourney)
+      EventScraper.new.scrape_tournament_info(tourney)
       # binding.pry
-      puts "Here's the info about #{tourney.name}"
-      puts "Info: #{tourney.about}"
+      puts "Info: #{@info}"
   end
 
   def tournament_locator(input)

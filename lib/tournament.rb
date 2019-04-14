@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
 class Tournament
-  attr_accessor :name, :date, :tier, :url, :id
+  attr_accessor :name, :date, :tier, :url, :id, :info
 
   @@all = []
   @@current_id = 1
 
-  def initialize(name = nil, date = nil, tier = nil, url = nil)
+  def initialize(name = nil, date = nil, tier = nil, url = nil, info = nil)
     @name = name
     @date = date
     @tier = tier
     @url = url
+    @info = info
     @id = @@current_id
     @@all << self
     @@current_id += 1

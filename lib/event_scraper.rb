@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class EventScraper
-  attr_accessor :tourney, :about_event
+  attr_accessor :tourney, :info
 
   BASE_URL = "https://www.discgolfscene.com"
 
@@ -23,10 +23,7 @@ class EventScraper
   end
 
   def scrape_tournament_info(tourney)
-    tourney_info = Nokogiri::HTML(open(tourney.url))
-    name = tourney_info.css(".tournament-name").text
-    about = tourney_info.css(".tournament-about").text
-    @about_event = AboutTournament.new
-    # binding.pry
+    tourney_page = Nokogiri::HTML(open(tourney.url))
+    @info = tourney_page.css(".tournament-about").text
   end
 end
