@@ -24,6 +24,6 @@ class EventScraper
 
   def scrape_tournament_info(tourney)
     tourney_page = Nokogiri::HTML(open(tourney.url))
-    @info = tourney_page.css(".tournament-about").text
+    tourney.info = tourney_page.css(".tournament-about").text
   end
 end
