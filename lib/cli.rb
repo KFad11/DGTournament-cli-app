@@ -7,10 +7,11 @@ class CLI
     make_selection
 
     input = gets.strip.to_i
-    input_check(input)
 
     tourney = tournament_locator(input)
     tournament_info(tourney)
+
+    goodbye
 
   end
 
@@ -41,24 +42,15 @@ class CLI
       EventScraper.new.scrape_tournament_info(tourney)
       # binding.pry
       puts "Here is the info about #{tourney.name}".colorize(:green)
-      puts "Info: #{tourney.info}".colorize(:white)
+      puts "Info: #{tourney.info}".colorize(:light_blue)
   end
 
   def tournament_locator(input)
     Tournament.find_by_id(input)
   end
 
-  def input_check(input)
-    if input >= 1 && input <= 80
-      true
-    else
-      puts "Invalid entry, please choose from 1 - 50".colorize(:red)
-      call
-    end
-  end
-
   def goodbye
-    puts "Come back soon to check up on the tournaments happening in PA!"
+    puts "-------------------------------------".colorize(:yellow)
+    puts "Come back soon to check up on the tournaments happening in PA!".colorize(:light_red)
   end
 end
-
