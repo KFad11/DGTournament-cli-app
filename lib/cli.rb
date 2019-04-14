@@ -12,7 +12,6 @@ class CLI
     tournament_info(tourney)
 
     goodbye
-
   end
 
   def welcome_message
@@ -39,10 +38,9 @@ class CLI
   end
 
   def tournament_info(tourney)
-      EventScraper.new.scrape_tournament_info(tourney)
-      # binding.pry
-      puts "Here is the info about #{tourney.name}".colorize(:green)
-      puts "Info: #{tourney.info}".colorize(:light_blue)
+    EventScraper.new.scrape_tournament_info(tourney)
+    puts "Here is the info about #{tourney.name}".colorize(:green)
+    puts "Info: #{tourney.info}".colorize(:light_blue)
   end
 
   def tournament_locator(input)
