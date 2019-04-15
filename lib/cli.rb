@@ -7,6 +7,16 @@ class CLI
     make_selection
 
     input = gets.strip.to_i
+    if input == "exit"
+      puts ""
+      goodbye
+      exit
+    elsif input <= 0
+      puts ""
+      puts "I don't understand that answer, let's start over."
+      call
+      exit
+    end
 
     tourney = tournament_locator(input)
     tournament_info(tourney)
