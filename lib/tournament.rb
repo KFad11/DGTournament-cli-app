@@ -6,7 +6,7 @@ class Tournament
   @@all = []
   @@current_id = 1
 
-  def initialize(name = nil, date = nil, tier = nil, url = nil, info = nil, id = nil)
+  def initialize(name = nil, date = nil, tier = nil, url = nil, info = nil)
     @name = name
     @date = date
     @tier = tier

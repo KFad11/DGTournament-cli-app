@@ -44,7 +44,8 @@ class CLI
   end
 
   def make_selection
-    puts "Please choose a tournament by typing in it's ID#, once a correct ID is chosen, the program will exit:"
+    puts "Please choose a tournament by typing in it's ID#, once a \
+    correct ID is chosen, the program will exit:"
   end
 
   def tournament_info(tourney)
