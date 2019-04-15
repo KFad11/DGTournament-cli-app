@@ -30,7 +30,6 @@ class CLI
     puts "Welcome to Pennsylvania Disc Golf Tournament Tracker"
     puts "See what disc golf tournaments are happening, when, \
 & what competition level they are based on their 'tier'"
-    puts "Please type 'list' to see the list of tournaments or exit to end the program"
   end
 
   def tournament_list
@@ -45,7 +44,7 @@ class CLI
   end
 
   def make_selection
-    puts "Please choose a tournament by typing in it's ID#:"
+    puts "Please choose a tournament by typing in it's ID#, once a correct ID is chosen, the program will exit:"
   end
 
   def tournament_info(tourney)
@@ -59,7 +58,8 @@ class CLI
   end
 
   def goodbye
-    puts "-------------------------------------"
+    puts "---------------------------------------------------------"
+    puts "Above is the info you requested."
     puts "Come back soon to check up on the tournaments happening in PA!"
   end
 end
