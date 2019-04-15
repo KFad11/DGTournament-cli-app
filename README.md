@@ -15,7 +15,7 @@
   *X Tier are experimental events, and usually have special rules that are outside the normal ones.
 
 ## How to run the program
-  Start the program by typing in `./bi/run` and the program will begin by listing out all the tournaments happening in the state of Pennsylvania.
+  Start the program by typing in `./bin/run` and the program will begin by listing out all the tournaments happening in the state of Pennsylvania.
   Then it will ask for an ID number to get the the info for the specific tournament you're interested in.
   That will provide all the details that the tournament director has listed on the event page.
   The program will exit after listing the information for the event, just start the process over if there's another tournament you'd like more info on.
