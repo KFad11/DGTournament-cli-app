@@ -9,21 +9,21 @@ class CLI
 
   def start
     tournament_list
-    make_selection
+    while true do
+      make_selection
 
-    input = gets.strip.to_i
-    if input <= 0
-      puts ""
-      puts "I don't understand that answer, let's start over."
-      sleep(3)
-      start
-      exit
+      input = gets.strip.downcase
+      if input == "exit"
+        goodbye
+        exit
+      elsif input.to_i <= 0
+        puts ""
+        puts "I don't understand that answer, let's start over."
+      elsif
+        tourney = tournament_locator(input)
+        tournament_info(tourney)
+      end
     end
-
-    tourney = tournament_locator(input)
-    tournament_info(tourney)
-
-    goodbye
   end
 
   def welcome_message
@@ -44,8 +44,7 @@ class CLI
   end
 
   def make_selection
-    puts "Please choose a tournament by typing in it's ID#, once a \
-    correct ID is chosen, the program will exit:"
+    puts "Please choose a tournament by typing in it's ID#, or type exit to quit:"
   end
 
   def tournament_info(tourney)
@@ -55,12 +54,10 @@ class CLI
   end
 
   def tournament_locator(input)
-    Tournament.find_by_id(input)
+    Tournament.find_by_id(input.to_i)
   end
 
   def goodbye
-    puts "---------------------------------------------------------"
-    puts "Above is the info you requested."
     puts "Come back soon to check up on the tournaments happening in PA!"
   end
 end

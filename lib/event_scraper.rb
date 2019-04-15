@@ -11,13 +11,30 @@ class EventScraper
     page.css(".tournaments-listing-all").children.each do |tournament|
       next if tournament.attr("style") == "text-align: center;"
 
-      name = tournament.css("em").map { |t_name| t_name.text.strip }.first
-      date = tournament.css(".t-date").map { |t_date| t_date.text.strip }.first
-      tier = tournament.css(".info.ts").map { |t_tier| t_tier.text.strip }.first
-      tier = "Unsanctioned" if tier == ""
       url = BASE_URL + tournament.css("a").first["href"]
-      Tournament.new(name, date, tier, url)
+      Tournament.new(get_name(tournament), get_date(tournament), get_tier(tournament), url)
     end
+  end
+
+  def get_name(tournament)
+    get_info(tournament, "em")
+  end
+
+  def get_date(tournament)
+    get_info(tournament, ".t-date")
+  end
+
+  def get_tier(tournament)
+    tier = get_info(tournament, ".info.ts")
+    if tier == ""
+      "Unsanctioned"
+    else
+      tier
+    end
+  end
+
+  def get_info(tournament, selector)
+    tournament.css(selector).map { |element| element.text.strip }.first
   end
 
   def scrape_tournament_info(tourney)
