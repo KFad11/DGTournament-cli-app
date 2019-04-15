@@ -22,25 +22,25 @@ class CLI
   end
 
   def tournament_list
-    puts "Master List of tournaments:".colorize(:red)
+    puts "Master List of tournaments:"
     EventScraper.new.scrape_tournaments
     Tournament.all.map do |tourney|
-      puts "Tournament ID: #{tourney.id}".colorize(:light_blue)
-      puts "Name: #{tourney.name}".colorize(:green)
-      puts "Date: #{tourney.date}".colorize(:green)
-      puts "Tier: #{tourney.tier}".colorize(:green)
-      puts "---------------------------------------------------------".colorize(:yellow)
+      puts "Tournament ID: #{tourney.id}"
+      puts "Name: #{tourney.name}"
+      puts "Date: #{tourney.date}"
+      puts "Tier: #{tourney.tier}"
+      puts "---------------------------------------------------------"
     end
   end
 
   def make_selection
-    puts "Please choose a tournament by typing in it's ID#:".colorize(:light_green)
+    puts "Please choose a tournament by typing in it's ID#:"
   end
 
   def tournament_info(tourney)
     EventScraper.new.scrape_tournament_info(tourney)
-    puts "Here is the info about #{tourney.name}".colorize(:green)
-    puts "Info: #{tourney.info}".colorize(:light_blue)
+    puts "Here is the info about #{tourney.name}"
+    puts "Info: #{tourney.info}"
   end
 
   def tournament_locator(input)
@@ -48,7 +48,7 @@ class CLI
   end
 
   def goodbye
-    puts "-------------------------------------".colorize(:yellow)
-    puts "Come back soon to check up on the tournaments happening in PA!".colorize(:light_red)
+    puts "-------------------------------------"
+    puts "Come back soon to check up on the tournaments happening in PA!"
   end
 end
