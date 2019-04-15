@@ -2,19 +2,21 @@
 
 class CLI
   def call
+    EventScraper.new.scrape_tournaments
     welcome_message
+    start
+  end
+
+  def start
     tournament_list
     make_selection
 
     input = gets.strip.to_i
-    if input == "exit"
-      puts ""
-      goodbye
-      exit
-    elsif input <= 0
+    if input <= 0
       puts ""
       puts "I don't understand that answer, let's start over."
-      call
+      sleep(3)
+      start
       exit
     end
 
@@ -33,7 +35,6 @@ class CLI
 
   def tournament_list
     puts "Master List of tournaments:"
-    EventScraper.new.scrape_tournaments
     Tournament.all.map do |tourney|
       puts "Tournament ID: #{tourney.id}"
       puts "Name: #{tourney.name}"

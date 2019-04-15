@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class EventScraper
-  attr_accessor :tourney, :info
-
   BASE_URL = "https://www.discgolfscene.com"
 
   def page
@@ -18,7 +16,7 @@ class EventScraper
       tier = tournament.css(".info.ts").map { |t_tier| t_tier.text.strip }.first
       tier = "Unsanctioned" if tier == ""
       url = BASE_URL + tournament.css("a").first["href"]
-      @tourney = Tournament.new(name, date, tier, url)
+      Tournament.new(name, date, tier, url)
     end
   end
 
